@@ -1,0 +1,22 @@
+FROM quay.io/devfile/base-developer-image:ubi8-latest
+
+USER 0
+
+# Python
+RUN dnf -y module enable python39:3.9 && \
+    dnf -y update && \
+    dnf -y install python39 python39-devel python39-setuptools python39-pip nss_wrapper && \
+    dnf -y clean all --enablerepo='*'
+
+RUN cd /usr/bin \
+    && if [ ! -L python ]; then ln -s python3.9 python; fi \
+    && if [ ! -L pydoc ]; then ln -s pydoc3.9 pydoc; fi \
+    && if [ ! -L python-config ]; then ln -s python3.9-config python-config; fi \
+    && if [ ! -L pip ]; then ln -s pip-3.9 pip; fi
+
+RUN pip install pylint yq ansible-core ansible-lint molecule yamllint
+
+# Set permissions on /etc/passwd and /home to allow arbitrary users to write
+RUN mkdir -p /home/user && chgrp -R 0 /home && chmod -R g=u /etc/passwd /etc/group /home
+
+USER 10001
