@@ -1,0 +1,57 @@
+schemaVersion: 2.1.0
+metadata:
+  name: ansible-dev-environment
+  version: 0.1.0
+projects:
+  - name: openshift-playbooks
+    git:
+      remotes:
+        origin: 'https://github.com/pgustafs/openshift-playbooks.git'
+      checkoutFrom:
+        revision: master
+  - name: galaxy-role-skeleton
+    git:
+      remotes:
+        origin: 'https://github.com/pgustafs/galaxy-role-skeleton.git'
+      checkoutFrom:
+        revision: master
+components:
+  - name: ansible
+    container:
+      image: quay.io/jwennerberg/ee-ansible-dev:latest
+      memoryLimit: 512Mi
+      mountSources: true
+      volumeMounts:
+        - name: venv
+          path: /home/user/.venv
+        - name: ansible-volume
+          path: /home/user/.ansible
+  - name: venv
+    volume: {}
+  - name: ansible-volume
+    volume: {}
+commands:
+  - id: ansible-terminal-virtual-env
+    exec:
+      component: ansible
+      commandLine: 'TMPFILE=$(mktemp); echo "source ${HOME}/.venv/bin/activate" > $TMPFILE; bash --rcfile $TMPFILE'
+      label: Ansible Terminal (Virtual Env)
+      workingDir: "${PROJECTS_ROOT}"
+  - id: create-ansible-role
+    exec:
+      component: ansible
+      commandLine: 'read -e -p "Enter Role Name: " NAME; source ${HOME}/.venv/bin/activate; ansible-galaxy init --role-skeleton=galaxy-role-skeleton/skeleton_empty $NAME && exit'
+      label: Create Ansible Role
+      workingDir: '${PROJECTS_ROOT}'
+  - exec:
+      commandLine: 'read -e -p "Enter Token: " TOKEN; sed -i s/REPLACEME/$TOKEN/ ansible.cfg && exit'
+      component: ansible
+      label: Add Automation Hub Token
+      workingDir: '${HOME}/.ansible'
+    id: add-automation-hub-token
+  - exec:
+      commandLine: 'read -e -p "Enter Collection Name: " COLLECTION; source ${HOME}/.venv/bin/activate; ansible-galaxy collection install $COLLECTION && exit'
+      component: ansible
+      label: Install Collection
+      workingDir: '${HOME}'
+    id: install-collection
