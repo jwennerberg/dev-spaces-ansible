@@ -10,13 +10,13 @@ projects:
   - name: openshift-playbooks
     git:
       remotes:
-        origin: 'https://github.com/pgustafs/openshift-playbooks.git'
+        origin: 'https://github.com/jwennerberg/openshift-playbooks.git'
       checkoutFrom:
         revision: master
   - name: galaxy-role-skeleton
     git:
       remotes:
-        origin: 'https://github.com/pgustafs/galaxy-role-skeleton.git'
+        origin: 'https://github.com/jwennerberg/galaxy-role-skeleton.git'
       checkoutFrom:
         revision: master
 components:
