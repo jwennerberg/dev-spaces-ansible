@@ -1,0 +1,23 @@
+schemaVersion: 1.0.0
+metadata:
+  id: redhat/ansible
+  publisher: redhat
+  name: ansible
+  version: latest
+  displayName: Ansible
+  description: Ansible Language Support
+  repository: https://github.com/ansible/vscode-ansible
+  categories:
+    - Programming Languages
+    - Linters
+  icon: /images/redhat-vscode-ansible-icon.png
+sidecar:
+  image: registry.redhat.io/devspaces/udi-rhel8:3.1
+  name: vscode-ansible
+  memoryLimit: 256Mi
+  memoryRequest: 20Mi
+  cpuLimit: 500m
+  cpuRequest: 30m
+dependencies: []
+extensions:
+  - relative:extension/resources/open-vsx_org/api/redhat/ansible/0.14.73/file/redhat.ansible-0.14.73.vsix

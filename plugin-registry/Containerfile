@@ -1,0 +1,9 @@
+FROM registry.redhat.io/devspaces/pluginregistry-rhel8:latest
+
+ARG VSCODE_ANSIBLE_VERSION=0.14.73
+
+RUN mkdir -p /var/www/html/v3/resources/open-vsx_org/api/redhat/ansible/${VSCODE_ANSIBLE_VERSION}/file && \
+    mkdir -p /var/www/html/v3/plugins/redhat/ansible/latest && \
+    curl -L -o /var/www/html/v3/resources/open-vsx_org/api/redhat/ansible/${VSCODE_ANSIBLE_VERSION}/file/redhat.ansible-${VSCODE_ANSIBLE_VERSION}.vsix https://www.open-vsx.org/api/redhat/ansible/${VSCODE_ANSIBLE_VERSION}/file/redhat.ansible-${VSCODE_ANSIBLE_VERSION}.vsix
+
+COPY meta.yaml che-theia-plugin.yaml /var/www/html/v3/plugins/redhat/ansible/latest/
