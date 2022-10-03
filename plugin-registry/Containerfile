@@ -7,3 +7,5 @@ RUN mkdir -p /var/www/html/v3/resources/open-vsx_org/api/redhat/ansible/${VSCODE
     curl -L -o /var/www/html/v3/resources/open-vsx_org/api/redhat/ansible/${VSCODE_ANSIBLE_VERSION}/file/redhat.ansible-${VSCODE_ANSIBLE_VERSION}.vsix https://www.open-vsx.org/api/redhat/ansible/${VSCODE_ANSIBLE_VERSION}/file/redhat.ansible-${VSCODE_ANSIBLE_VERSION}.vsix
 
 COPY meta.yaml che-theia-plugin.yaml /var/www/html/v3/plugins/redhat/ansible/latest/
+
+RUN chgrp -R 0 /var/www/html && chmod -R g+rw /var/www/html
