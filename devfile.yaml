@@ -1,6 +1,6 @@
 schemaVersion: 2.1.0
 metadata:
-  generateName: ansible-dev-space-
+  name: ansible-dev-space
   version: 0.1.0
 projects:
   - name: ansible-examples
