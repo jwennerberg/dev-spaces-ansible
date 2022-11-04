@@ -14,8 +14,12 @@ RUN cd /usr/bin \
     && if [ ! -L python-config ]; then ln -s python3.9-config python-config; fi \
     && if [ ! -L pip ]; then ln -s pip-3.9 pip; fi
 
+ENV OC_VERSION=latest
+
 # TODO: install ansible tooling from AAP repositories instead
-RUN pip install pylint yq ansible-core ansible-lint molecule yamllint
+RUN pip install pylint yq ansible-core ansible-lint ansible-builder ansible-navigator molecule yamllint && \
+    curl -L https://mirror.openshift.com/pub/openshift-v4/clients/oc/${OC_VERSION}/linux/oc.tar.gz | tar -C /usr/local/bin -xz && \
+    chmod +x /usr/local/bin/oc
 
 # Set permissions on /etc/passwd and /home to allow arbitrary users to write
 RUN mkdir -p /home/user && chgrp -R 0 /home && chmod -R g=u /etc/passwd /etc/group /home
