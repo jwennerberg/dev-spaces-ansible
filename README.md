@@ -4,7 +4,7 @@
 
 ## DEMO
 
-### 1. Create Workspace
+### 1. Create Workspace in OpenShift Dev Spaces
 ### 2. Install recommended VSCode extensions
 - redhat.ansible
 - redhat.yaml
