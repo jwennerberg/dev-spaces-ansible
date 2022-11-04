@@ -3,6 +3,10 @@ metadata:
   name: ansible-dev-space
   version: 0.1.0
 projects:
+  - name: dev-spaces-ansible
+    git:
+      remotes:
+        origin: 'https://github.com/jwennerberg/dev-spaces-ansible.git'
   - name: ansible-examples
     git:
       remotes:
