@@ -7,6 +7,8 @@ projects:
     git:
       remotes:
         origin: 'https://github.com/jwennerberg/dev-spaces-ansible.git'
+      checkoutFrom:
+        revision: dev
   - name: ansible-examples
     git:
       remotes:
