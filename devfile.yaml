@@ -42,12 +42,6 @@ commands:
       label: Create Ansible Role
       workingDir: '${PROJECTS_ROOT}'
   - exec:
-      commandLine: 'read -e -p "Enter Token: " TOKEN; sed -i s/REPLACEME/$TOKEN/ ansible.cfg && exit'
-      component: ansible
-      label: Add Automation Hub Token
-      workingDir: '${HOME}/.ansible'
-    id: add-automation-hub-token
-  - exec:
       commandLine: 'read -e -p "Enter Collection Name: " COLLECTION; ansible-galaxy collection install $COLLECTION'
       component: ansible
       label: Install Collection
