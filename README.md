@@ -7,7 +7,7 @@
 ### 1. Create Workspace in OpenShift Dev Spaces
 ### 2. Install recommended VSCode extensions
 - redhat.ansible
-- redhat.yaml
+- redhat.vscode-yaml
 
 ### 3. Open and review existing playbook
 
